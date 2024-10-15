@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default ({ setCreateSipmentModel, allShipmentsdata }) => {
+export default ({ setCreateShipmentModel, allShipmentsdata }) => {
   // Function to convert time
   const convertTime = (time) => {
     const newTime = new Date(time);
@@ -26,15 +26,17 @@ export default ({ setCreateSipmentModel, allShipmentsdata }) => {
           </p>
         </div>
         <div className="mt-3 md:mt-0">
-          <button
-            onClick={() => setCreateSipmentModel(true)}
+          <p 
+          onClick={()=> setCreateShipmentModel(true)}
+          href="javascript:void(0)"
+          
             className="inline-block px-4 py-2 text-white duration-150 font-medium bg-gray-800 hover:bg-gray-700 active:bg-gray-900 md:text-sm rounded-lg md:inline-flex"
           >
             ADD TRACK
-          </button>
+         </p>
         </div>
       </div>
-      <div className="mt-12 shadow-sm border rounded-lg overflow-hidden">
+      <div className="mt-12 shadow-sm border rounded-lg overflow-x-auto">
         <table className="w-full table-auto text-sm text-left">
           <thead className="bg-gray-50 text-gray-600 font-medium border-b">
             <tr>
@@ -48,17 +50,17 @@ export default ({ setCreateSipmentModel, allShipmentsdata }) => {
               <th className="py-3 px-6">STATUS</th>
             </tr>
           </thead>
-          <tbody>
-            {allShipmentsdata.map((shipment, index) => (
-              <tr key={index}>
-                <td className="py-3 px-6">{shipment.sender}</td>
-                <td className="py-3 px-6">{shipment.receiver}</td>
-                <td className="py-3 px-6">{convertTime(shipment.pickupTime)}</td>
-                <td className="py-3 px-6">{shipment.distance}</td>
-                <td className="py-3 px-6">{shipment.price}</td>
-                <td className="py-3 px-6">{convertTime(shipment.deliveryTime)}</td>
-                <td className="py-3 px-6">{shipment.paid ? 'Yes' : 'No'}</td>
-                <td className="py-3 px-6">{shipment.status}</td>
+          <tbody className='text-gray-600 divide-y'>
+            {allShipmentsdata?.map((shipment, idx) => (
+              <tr key={idx}>
+                <td className="py-4 px-6 whitespace-nowrap">{shipment.sender.slice(0,15)}...</td>
+                <td className="py-4 px-6 whitespace-nowrap">{shipment.receiver.slice(0,15)}...</td>
+                <td className="py-4 px-6 whitespace-nowrap">{convertTime(shipment.pickupTime)}</td>
+                <td className="py-4 px-6 whitespace-nowrap">{shipment.distance} km</td>
+                <td className="py-4 px-6 whitespace-nowrap">{shipment.price}</td>
+                <td className="py-4 px-6 whitespace-nowrap">{convertTime(shipment.deliveryTime)}</td>
+                <td className="py-4 px-6 whitespace-nowrap">{shipment.isPaid ? 'Yes' : 'No'}</td>
+                <td className="py-4 px-6 whitespace-nowrap">{shipment.status === 0 ? "Pendin" : shipment.status=== 1?"IN_TRANSIT": "Delivered"}</td>
               </tr>
             ))}
           </tbody>

@@ -1,11 +1,12 @@
-// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx}', // Ensure you include all paths to pages
-    './components/**/*.{js,ts,jsx,tsx}', // Include paths to components
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./Components/**/*.{js,ts,jsx,tsx}",
+    // Add other paths where your content files are located
   ],
   theme: {
     extend: {},
   },
   plugins: [],
-};
+}

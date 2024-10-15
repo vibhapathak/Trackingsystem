@@ -1,53 +1,54 @@
 import React,{useState, useEffect, useContext} from "react";
 import {
-  Footer,
   Table,
   Form,
   Services,
   Profile,
   GetShipment,
-  CompleteShipment,
   StartShipment,
-  Nav1,
-  Nav3,
-  Nav2,
-  Fot1,
-  Fot2,
-  Str1,
+  CompleteShipment,
+ 
 } from "../Components/index";
+
 import { TrackingContext} from "@/Context/Tracking";
+
+
 const index = () =>{
   const {
     currentUser,
     createShipment,
     getAllShipment,
-    CompleteShipment,
-    GetShipment,
-    StartShipment,
-    GetShipmentCount,
+    completeShipment,
+    getShipment,
+    startShipment,
+    getShipmentsCount,
   } = useContext(TrackingContext);
   //state variable
   const [createShipmentModel, setCreateShipmentModel] = useState(false);
   const [openProfile,setOpenProfile] = useState(false);
   const [completeModal, setCompleteModal]= useState(false);
   const [startModal, setStartModal] = useState(false);
-  const [getModal, setGetModal] = useState(false);
-  const [allShipmentsdata, setallShipmentsdata]= useState();
+  const [getModel, setGetModel] = useState(false);
+  const [allShipmentsdata, setallShipmentsdata]= useState([]);
 
-  useEffect(()=> {
-    const getCampaignData = getAllShipment();
-    return async () =>{
-      const allData = await getCampaignData;
-      setallShipmentsdata(allData);
-
-    };
+  useEffect(() => {
+    //const getCampaignsData = getAllShipment();
+    const getCampaignsData = getAllShipment;
+  return async () =>{
+    const allData = await getCampaignsData;
+    setallShipmentsdata(allData);
+  };
+ 
   }, []);
+
+
+  
   return (
     <>
     <Services
     setOpenProfile = {setOpenProfile}
     setCompleteModal = {setCompleteModal}
-    setGetModal = {setGetModal}
+    setGetModel = {setGetModel}
     setStartModal= {setStartModal}
     />
     <Table
@@ -63,22 +64,22 @@ const index = () =>{
     openProfile = {openProfile}
     setOpenProfile = {setOpenProfile}
     currentUser= {currentUser}
-    GetShipmentCount = {GetShipmentCount}
+    getShipmentsCount = {getShipmentsCount}
     />
     <CompleteShipment
     completeModal = {completeModal}
     setCompleteModal = {setCompleteModal}
-    CompleteShipment = {CompleteShipment}
+    completeShipment = {completeShipment}
     />
     <GetShipment
-    getModal = {getModal}
-    setGetModal = {setGetModal}
-    GetShipment = {GetShipment}
+    getModel = {getModel}
+    setGetModel = {setGetModel}
+    getShipment = {getShipment}
     />
     <StartShipment
     startModal = {startModal}
     setStartModal= {setStartModal}
-    StartShipment = {StartShipment}
+    startShipment = {startShipment}
     />
     </>
   );

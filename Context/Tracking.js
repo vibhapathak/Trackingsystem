@@ -17,6 +17,7 @@ export const TrackingContext = React.createContext();
 
 export const TrackingProvider = ({ children }) => {
     // State variable
+    const [getModel, setGetModel] = useState(false);
     const DappName = "PRODUCT TRACKING DAPP";
     const [currentUser, setCurrentUser] = useState("");
 
@@ -26,21 +27,26 @@ export const TrackingProvider = ({ children }) => {
         try {
             const web3Modal = new Web3Modal();
             const connection = await web3Modal.connect();
-            const provider = new ethers.providers.Web3Provider(connection);
+            console.log('ethers:', ethers);
+console.log('ethers.providers:', ethers.BrowserProvider);
+
+            const provider = new ethers.BrowserProvider(connection);
+
+            //const provider = new ethers.providers.Web3Provider(connection);
             const signer = provider.getSigner();
             const contract = fetchContract(signer);
             const createItem = await contract.createShipment(
                 receiver,
                 new Date(pickUpTime).getTime(),
                 distance,
-                ethers.utils.parseUnits(price, 18), {
-                    value: ethers.utils.parseUnits(price, 18),
+                ethers.parseUnits(price, 18), {
+                    value: ethers.parseUnit(price, 18),
                 }
             );
             await createItem.wait();
             console.log(createItem);
         } catch (error) {
-            console.log("something went wrong", error);
+            console.log("something went wroooong", error);
         }
     };
 

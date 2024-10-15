@@ -1,5 +1,5 @@
 import Image from "next/image";
-import images from "./Images";
+import images from "../Images/index";
 
 export default ({
     setOpenProfile,
@@ -8,22 +8,22 @@ export default ({
     setStartModal,
 }) => {
     const team = [
-        { avatar: images.Compshipment, alt: "Compshipment Image" },
-        { avatar: images.GetShipment, alt: "Get Shipment Image" },
-        { avatar: images.StartShipment, alt: "Start Shipment Image" },
-        { avatar: images.UserProfile, alt: "User Profile Image" },
-        { avatar: images.ShipmentCount, alt: "Shipment Count Image" },
-        { avatar: images.SendShipment, alt: "Send Shipment Image" },
+        { avatar: images.compShipment, alt: "Compshipment Image" },
+        { avatar: images.getShipment, alt: "Get Shipment Image" },
+        { avatar: images.startShipment, alt: "Start Shipment Image" },
+        { avatar: images.userProfile, alt: "User Profile Image" },
+        { avatar: images.shipCount, alt: "Shipment Count Image" },
+        { avatar: images.send, alt: "Send Shipment Image" },
     ];
 
-    const openModelBox = (index) => {
-        if (index === 1) {
+    const openModelBox = (text) => {
+        if (text === 1) {
             setCompleteModal(true);
-        } else if (index === 2) {
+        } else if (text === 2) {
             setGetModel(true);
-        } else if (index === 3) {
+        } else if (text === 3) {
             setStartModal(true);
-        } else if (index === 4) {
+        } else if (text === 4) {
             setOpenProfile(true);
         }
     };
@@ -37,20 +37,14 @@ export default ({
                             <li key={i}>
                                 <div
                                     onClick={() => openModelBox(i + 1)}
-                                    className="w-full h-60 sm:h-52 md:h-56 cursor-pointer"
-                                    role="button"
-                                    tabIndex={0} // Make the div focusable
-                                    onKeyPress={(e) => {
-                                        if (e.key === 'Enter') {
-                                            openModelBox(i + 1);
-                                        }
-                                    }} // Handle Enter key press
+                                    className="relative w-full h-60 sm:h-52 md:h-56"
                                 >
                                     <Image
                                         src={item.avatar}
                                         alt={item.alt}
-                                        layout="fill"
-                                        className="w-full h-full object-cover object-center shadow-md rounded-xl"
+                                        layout="fill" // Use fill for responsive sizing
+                                        objectFit="cover" // Ensure the image covers the container
+                                        className="shadow-md rounded-xl"
                                     />
                                 </div>
                             </li>
